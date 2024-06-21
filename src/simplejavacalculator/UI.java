@@ -35,7 +35,7 @@ import javax.swing.ImageIcon;
 import java.io.*;
 
 public class UI implements ActionListener {
-   
+    
    private final JFrame frame;
    
    private final JPanel panel;
@@ -65,7 +65,7 @@ public class UI implements ActionListener {
    private BufferedImageCustom imageReturn;
    
    public UI() throws IOException {
-      frame = new JFrame("Calculator PH");
+      frame = new JFrame("Simple Calculator");
       
       imageReturn = new BufferedImageCustom();
       image = new ImageIcon(imageReturn.imageReturn());      
@@ -97,7 +97,7 @@ public class UI implements ActionListener {
       butDivide = new JButton("/");      
       butEqual = new JButton("=");      
       butSquareRoot = new JButton("sqrt");      
-      butSquare = new JButton("x*x");      
+      butSquare = new JButton("^2");      
       butOneDividedBy = new JButton("1/x");      
       butCos = new JButton("Cos");      
       butSin = new JButton("Sin");      
@@ -106,7 +106,7 @@ public class UI implements ActionListener {
       butxpowerofy = new JButton("x^y");      
       butlog = new JButton("log10(x)");      
       butrate = new JButton("x%");      
-      butabs = new JButton("abs(x)");      
+      butabs = new JButton("abs|x|");      
       butCancel = new JButton("C");      
       butBinary = new JButton("Bin");      
       
@@ -235,69 +235,68 @@ public class UI implements ActionListener {
             return;
          }
       }
-
     
       try {
-         checkNum = Double.parseDouble(text.getText());
+          checkNum = Double.parseDouble(text.getText());
       } catch(NumberFormatException k) {
 
       }
 
       if (checkNum != null || source == butCancel) {
          if (source == butAdd) {
-            writer(calc.calculateBi(Calculator.BiOperatorModes.add, reader()));
+            writer(calc.calculateBi(checkNum, reader()));
             text.replaceSelection(butAdd.getText());
          }
 
          if (source == butMinus) {
-            writer(calc.calculateBi(Calculator.BiOperatorModes.minus, reader()));
+            writer(calc.calculateBi(checkNum, reader()));
             text.replaceSelection(butMinus.getText());
          }
 
          if (source == butMultiply) {
-            writer(calc.calculateBi(Calculator.BiOperatorModes.multiply, reader()));
+            writer(calc.calculateBi(checkNum, reader()));
             text.replaceSelection(butMultiply.getText());
          }
 
          if (source == butDivide) {
-            writer(calc.calculateBi(Calculator.BiOperatorModes.divide, reader()));
+            writer(calc.calculateBi(checkNum, reader()));
             text.replaceSelection(butDivide.getText());
          }
          
          if (source == butxpowerofy) {
-            writer(calc.calculateBi(Calculator.BiOperatorModes.xpowerofy, reader()));
+            writer(calc.calculateBi(checkNum, reader()));
          }
 
          if (source == butSquare) {
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.square, reader()));
+            writer(calc.calculateMono(reader()));
          }
 
          if (source == butSquareRoot)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.squareRoot, reader()));
+            writer(calc.calculateMono(reader()));
 
          if (source == butOneDividedBy)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.oneDividedBy, reader()));
+            writer(calc.calculateMono(reader()));
 
          if (source == butCos)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.cos, reader()));
+            writer(calc.calculateMono(reader()));
 
          if (source == butSin)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.sin, reader()));
+            writer(calc.calculateMono( reader()));
 
          if (source == butTan)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.tan, reader()));
+            writer(calc.calculateMono(reader()));
 
          if (source == butlog)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.log, reader()));
+            writer(calc.calculateMono( reader()));
 
          if (source == butln)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.ln, reader())); 
+            writer(calc.calculateMono(reader())); 
 
          if (source == butrate)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.rate, reader()));
+            writer(calc.calculateMono( reader()));
 
          if (source == butabs)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.abs, reader()));
+            writer(calc.calculateMono( reader()));
 
          if (source == butEqual)
             writer(calc.calculateEqual(reader()));
